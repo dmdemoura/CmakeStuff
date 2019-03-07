@@ -1,5 +1,5 @@
 find_path(ADVENCORE_INCLUDE_DIR advenCore/VBAPrint.hpp)
-find_library(ADVENCORE_LIBRARY NAMES advencore.a)
+find_library(ADVENCORE_LIBRARY NAMES libadvencore.a)
 
 if (ADVENCORE_INCLUDE_DIR AND ADVENCORE_LIBRARY)
     add_library(advencore INTERFACE)
