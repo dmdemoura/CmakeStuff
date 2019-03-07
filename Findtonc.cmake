@@ -1,0 +1,10 @@
+find_path(TONC_INCLUDE_DIR tonc.h PATHS $ENV{DEVKITPRO}/libtonc/include)
+find_library(TONC_LIBRARY NAMES libtonc.a PATHS $ENV{DEVKITPRO}/libtonc/lib)
+
+if (TONC_INCLUDE_DIR AND TONC_LIBRARY)
+    add_library(tonc INTERFACE)
+    target_include_directories(tonc INTERFACE ${TONC_INCLUDE_DIR})
+    target_link_libraries(tonc INTERFACE ${TONC_LIBRARY})
+else()
+    message(FATAL_ERROR "Couldn't find libtonc")
+endif()
