@@ -3,12 +3,15 @@ function(add_rom target)
     add_executable(${target}.elf EXCLUDE_FROM_ALL ${ARGN})
 
     add_custom_target(
+
         ${target}.bin
         COMMENT "Building ${target}.bin"
         COMMAND ${CMAKE_OBJCOPY} -O binary ${target}.elf ${target}.bin
     )
     add_custom_target(
+
         ${target}.gba
+        ALL
         COMMENT "Building ${target}.gba"
         COMMAND cp ${target}.bin ${target}.gba && gbafix ${target}.gba
     )
@@ -22,14 +25,14 @@ function(add_gbfs_rom target)
 
     add_rom(${target} ${ARGN})
 
-    add_custom_target
-    (
+    add_custom_target(
+
         ${target}.gbfs
         COMMENT "Building ${target}.gbfs"
         COMMAND ${CMAKE_CURRENT_SOURCE_DIR}/makeData.py ${CMAKE_CURRENT_BINARY_DIR}/${target}.gbfs ${CMAKE_CURRENT_SOURCE_DIR}/data ${CMAKE_CURRENT_SOURCE_DIR}/buildData
     )
-    add_custom_target
-    (
+    add_custom_target(
+
         ${target}.gbfs.gba
         ALL
         COMMENT "Building ${target}.gbfs.gba"
